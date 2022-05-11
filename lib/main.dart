@@ -75,37 +75,71 @@ class MyApp extends StatelessWidget {
                           spreadRadius: 1,
                           blurRadius: 16)
                     ]),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        buildColumnTop('Candels', isSelected: true),
-                        buildColumnTop('Vases'),
-                        buildColumnTop('Bins'),
-                        buildColumnTop('Floral'),
-                        buildColumnTop('Decor'),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      physics: BouncingScrollPhysics(),
-                      child: Row(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          buildColumnWithRow(1, 'Elemental Tin Candel', 29),
-                          buildColumnWithRow(2, 'Summer Candel', 30),
-                          buildColumnWithRow(3, 'Winter Candel', 25),
-                          buildColumnWithRow(4, 'WSpring Candel', 40),
+                          buildColumnTop('Candels', isSelected: true),
+                          buildColumnTop('Vases'),
+                          buildColumnTop('Bins'),
+                          buildColumnTop('Floral'),
+                          buildColumnTop('Decor'),
                         ],
                       ),
-                    )
-                  ],
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        physics: BouncingScrollPhysics(),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 20,
+                            ),
+                            buildColumnWithRow(1, 'Elemental Tin Candel', 29),
+                            buildColumnWithRow(2, 'Summer Candel', 30),
+                            buildColumnWithRow(3, 'Winter Candel', 25),
+                            buildColumnWithRow(4, 'WSpring Candel', 40),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      LineBar(),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 23.0,right: 23,top: 20,bottom: 2),
+                        child: Row(
+                          children: [
+                          Text('Holiday Special',
+                            style: TextStyle(fontSize: 24),),
+                          Spacer(),
+                          Text('View All',
+                            style: TextStyle(fontSize: 20,color: Colors.grey),),
+                        ],),
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        physics: BouncingScrollPhysics(),
+                        child: Row(
+                          children: [
+                            buildBottomContainer(4),
+                            buildBottomContainer(3),
+                            buildBottomContainer(2),
+                            buildBottomContainer(1),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             )
@@ -192,5 +226,63 @@ class MyApp extends StatelessWidget {
         ],
       ),
     );
+  }
+
+ Container buildBottomContainer(int i)  {
+    return Container(
+      margin: EdgeInsets.only(left: 20),
+      height: 200,
+      width: 220,
+      child: Row(children: [
+        ClipRRect(
+            borderRadius: BorderRadius.circular(25)
+            ,child:
+        SizedBox(
+            height: 150,
+            width: 100,
+            child: Image.asset('assets/images/candel$i.jpg',fit: BoxFit.cover,))),
+        Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 15,),
+              Text('Coconut Milk'),
+              Text('16 oz',
+                style: TextStyle(color: Colors.grey,fontSize: 18),),
+              Spacer(),
+              Text('\$ 28'),
+              SizedBox(height: 15,)
+            ],),
+        )
+      ],),
+    );
+ }
+}
+
+class LineBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.width);
+    return Container(
+        height: 5,
+        width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.only(left: 40),
+        alignment: Alignment.centerLeft,
+        decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              bottomLeft: Radius.circular(10),
+            )),
+        child: Container(
+            height: 5,
+            width: 100,
+            decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                ))));
   }
 }

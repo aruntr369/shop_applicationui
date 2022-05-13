@@ -320,19 +320,22 @@ class MyCandelsList extends StatelessWidget {
           SizedBox(
             width: 20,
           ),
-          buildColumnWithRow(1, 'Elemental Tin Candel', 29,context),
-          buildColumnWithRow(2, 'Summer Candel', 30,context),
-          buildColumnWithRow(3, 'Winter Candel', 25,context),
-          buildColumnWithRow(4, 'WSpring Candel', 40,context),
+          buildColumnWithRow(1, 'Elemental Tin Candel', 29, context),
+          buildColumnWithRow(2, 'Summer Candel', 30, context),
+          buildColumnWithRow(3, 'Winter Candel', 25, context),
+          buildColumnWithRow(4, 'WSpring Candel', 40, context),
         ],
       ),
     );
   }
 
-  GestureDetector buildColumnWithRow(int imgurl, String title, int price,BuildContext context) {
+  GestureDetector buildColumnWithRow(
+      int imgurl, String title, int price, BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailsPage(imgurl,title,price,context),));
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => DetailsPage(imgurl, title, price, context),
+        ));
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),

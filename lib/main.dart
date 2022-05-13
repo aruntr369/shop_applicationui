@@ -332,7 +332,7 @@ class MyCandelsList extends StatelessWidget {
   GestureDetector buildColumnWithRow(int imgurl, String title, int price,BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailsPage(),));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailsPage(imgurl,title,price,context),));
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),

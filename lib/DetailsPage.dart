@@ -2,13 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatelessWidget {
-  const DetailsPage({Key? key}) : super(key: key);
+  int imgurl;
+  String title;
+  int price;
+  BuildContext context;
+  DetailsPage(this.imgurl, this.title, this.price,this.context);
 
-  @override
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Detaisss'),
+      body: Column(children: [
+        Text(title),
+        Text('$imgurl')
+      ],
       ),
     );
   }

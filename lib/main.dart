@@ -14,6 +14,27 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey[200],
+        bottomNavigationBar: Container(
+          color: Colors.white,
+          height: 70,
+          child: Container(
+            decoration: BoxDecoration(color: Colors.white,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40)),
+            boxShadow: [BoxShadow(blurRadius: 20,color: Colors.grey.shade300,spreadRadius: 1,)]
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+              buildContainerBottomNav(Icons.person),
+              buildContainerBottomNav(Icons.shopping_bag),
+              buildContainerBottomNav(Icons.home,isSelected: true),
+              buildContainerBottomNav(Icons.favorite),
+              buildContainerBottomNav(Icons.settings),
+
+
+            ],),
+          ),
+        ),
         appBar: AppBar(
           toolbarHeight: 70,
           backgroundColor: Colors.grey[200],
@@ -38,7 +59,9 @@ class MyApp extends StatelessWidget {
                 ),
                 Text(
                   'Shop  ',
-                  style: TextStyle(fontSize: 26, letterSpacing: 1),
+                  style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontSize: 26, letterSpacing: 1),
                 ),
                 Text(
                   'Anthropologie',
@@ -53,7 +76,7 @@ class MyApp extends StatelessWidget {
               height: 20,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 buildTextButton('Home Decor', isSelected: true),
                 buildTextButton('Bath & Body'),
@@ -258,6 +281,20 @@ class MyApp extends StatelessWidget {
       ],),
     );
  }
+ Container buildContainerBottomNav(IconData icon,{isSelected = false}){
+    return Container(
+      decoration: BoxDecoration(
+        color:isSelected? Colors.pink[100]: Colors.white,
+        shape: BoxShape.circle,
+        boxShadow:isSelected? [BoxShadow(color: Colors.grey,blurRadius: 10, spreadRadius: 1)]: []
+      ),
+      height: 50,
+      width: 50,
+      child: Icon(icon,color: isSelected? Colors.white: Colors.black,),
+    );
+ }
+
+
 }
 
 class LineBar extends StatelessWidget {

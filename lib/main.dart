@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_applicationui/DetailsPage.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  final navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,21 +20,28 @@ class MyApp extends StatelessWidget {
           color: Colors.white,
           height: 70,
           child: Container(
-            decoration: BoxDecoration(color: Colors.white,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40)),
-            boxShadow: [BoxShadow(blurRadius: 20,color: Colors.grey.shade300,spreadRadius: 1,)]
-            ),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40),
+                    topRight: Radius.circular(40)),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 20,
+                    color: Colors.grey.shade300,
+                    spreadRadius: 1,
+                  )
+                ]),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-              buildContainerBottomNav(Icons.person),
-              buildContainerBottomNav(Icons.shopping_bag),
-              buildContainerBottomNav(Icons.home,isSelected: true),
-              buildContainerBottomNav(Icons.favorite),
-              buildContainerBottomNav(Icons.settings),
-
-
-            ],),
+                buildContainerBottomNav(Icons.person),
+                buildContainerBottomNav(Icons.shopping_bag),
+                buildContainerBottomNav(Icons.home, isSelected: true),
+                buildContainerBottomNav(Icons.favorite),
+                buildContainerBottomNav(Icons.settings),
+              ],
+            ),
           ),
         ),
         appBar: AppBar(
@@ -61,7 +70,8 @@ class MyApp extends StatelessWidget {
                   'Shop  ',
                   style: TextStyle(
                       fontStyle: FontStyle.italic,
-                      fontSize: 26, letterSpacing: 1),
+                      fontSize: 26,
+                      letterSpacing: 1),
                 ),
                 Text(
                   'Anthropologie',
@@ -119,35 +129,28 @@ class MyApp extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        physics: BouncingScrollPhysics(),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 20,
-                            ),
-                            buildColumnWithRow(1, 'Elemental Tin Candel', 29),
-                            buildColumnWithRow(2, 'Summer Candel', 30),
-                            buildColumnWithRow(3, 'Winter Candel', 25),
-                            buildColumnWithRow(4, 'WSpring Candel', 40),
-                          ],
-                        ),
-                      ),
+                      MyCandelsList(),
                       SizedBox(
                         height: 15,
                       ),
                       LineBar(),
                       Padding(
-                        padding: const EdgeInsets.only(left: 23.0,right: 23,top: 20,bottom: 2),
+                        padding: const EdgeInsets.only(
+                            left: 23.0, right: 23, top: 20, bottom: 2),
                         child: Row(
                           children: [
-                          Text('Holiday Special',
-                            style: TextStyle(fontSize: 24),),
-                          Spacer(),
-                          Text('View All',
-                            style: TextStyle(fontSize: 20,color: Colors.grey),),
-                        ],),
+                            Text(
+                              'Holiday Special',
+                              style: TextStyle(fontSize: 24),
+                            ),
+                            Spacer(),
+                            Text(
+                              'View All',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.grey),
+                            ),
+                          ],
+                        ),
                       ),
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
@@ -219,82 +222,64 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Padding buildColumnWithRow(int imgurl, String title, int price) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
+  Container buildBottomContainer(int i) {
+    return Container(
+      margin: EdgeInsets.only(left: 20),
+      height: 200,
+      width: 220,
+      child: Row(
         children: [
-          Container(
-            height: 220,
-            width: 160,
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset("assets/images/candel$imgurl.jpg",
-                    fit: BoxFit.cover)),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            title,
-            style: TextStyle(fontSize: 16),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            '\$ $price',
-            style: TextStyle(fontSize: 20),
-          ),
+          ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: SizedBox(
+                  height: 150,
+                  width: 100,
+                  child: Image.asset(
+                    'assets/images/candel$i.jpg',
+                    fit: BoxFit.cover,
+                  ))),
+          Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 15,
+                ),
+                Text('Coconut Milk'),
+                Text(
+                  '16 oz',
+                  style: TextStyle(color: Colors.grey, fontSize: 18),
+                ),
+                Spacer(),
+                Text('\$ 28'),
+                SizedBox(
+                  height: 15,
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
   }
 
- Container buildBottomContainer(int i)  {
-    return Container(
-      margin: EdgeInsets.only(left: 20),
-      height: 200,
-      width: 220,
-      child: Row(children: [
-        ClipRRect(
-            borderRadius: BorderRadius.circular(25)
-            ,child:
-        SizedBox(
-            height: 150,
-            width: 100,
-            child: Image.asset('assets/images/candel$i.jpg',fit: BoxFit.cover,))),
-        Padding(
-          padding: const EdgeInsets.all(14.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 15,),
-              Text('Coconut Milk'),
-              Text('16 oz',
-                style: TextStyle(color: Colors.grey,fontSize: 18),),
-              Spacer(),
-              Text('\$ 28'),
-              SizedBox(height: 15,)
-            ],),
-        )
-      ],),
-    );
- }
- Container buildContainerBottomNav(IconData icon,{isSelected = false}){
+  Container buildContainerBottomNav(IconData icon, {isSelected = false}) {
     return Container(
       decoration: BoxDecoration(
-        color:isSelected? Colors.pink[100]: Colors.white,
-        shape: BoxShape.circle,
-        boxShadow:isSelected? [BoxShadow(color: Colors.grey,blurRadius: 10, spreadRadius: 1)]: []
-      ),
+          color: isSelected ? Colors.pink[100] : Colors.white,
+          shape: BoxShape.circle,
+          boxShadow: isSelected
+              ? [BoxShadow(color: Colors.grey, blurRadius: 10, spreadRadius: 1)]
+              : []),
       height: 50,
       width: 50,
-      child: Icon(icon,color: isSelected? Colors.white: Colors.black,),
+      child: Icon(
+        icon,
+        color: isSelected ? Colors.white : Colors.black,
+      ),
     );
- }
-
-
+  }
 }
 
 class LineBar extends StatelessWidget {
@@ -321,5 +306,63 @@ class LineBar extends StatelessWidget {
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10),
                 ))));
+  }
+}
+
+class MyCandelsList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      physics: BouncingScrollPhysics(),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 20,
+          ),
+          buildColumnWithRow(1, 'Elemental Tin Candel', 29,context),
+          buildColumnWithRow(2, 'Summer Candel', 30,context),
+          buildColumnWithRow(3, 'Winter Candel', 25,context),
+          buildColumnWithRow(4, 'WSpring Candel', 40,context),
+        ],
+      ),
+    );
+  }
+
+  GestureDetector buildColumnWithRow(int imgurl, String title, int price,BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailsPage(),));
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Container(
+              height: 220,
+              width: 160,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.asset("assets/images/candel$imgurl.jpg",
+                      fit: BoxFit.cover)),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              title,
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              '\$ $price',
+              style: TextStyle(fontSize: 20),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
